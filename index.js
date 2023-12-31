@@ -8,7 +8,7 @@ const helmet = require('helmet');
 
 require('dotenv').config();
 
-if (!process.env.WEATHER_API_KEY || !process.env.PURPLE_AIR_API_KEY) {
+if (!process.env.WEATHER_API_KEY || !process.env.PURPLE_AIR_API_KEY || !process.env.OPENWEATHER_MAP_API_KEY) {
     console.error('Error: Missing required environment variables.');
     process.exit(1);
 }
@@ -36,14 +36,14 @@ app.get('/', async (req, res) => {
 
 app.post('/fetch', async (req,res) => {
     try {
-        const zipCode = req.body.data.zipCode;
+        const coordinates = req.body.data.coordinates;
         const aqiSensor = req.body.data.sensor;
 
-        if (!zipCode || !aqiSensor){
+        if (!coordinates || !aqiSensor){
             res.status(400).json({ success: false, error: 'Zip Code or AQI Sensor was not defined in the request' });
         }else{
             const [weatherData, purpleAir] = await Promise.all([
-                fetchWeather(zipCode),
+                fetchWeather(coordinates),
                 fetchPurpleAir(aqiSensor)
             ]);
             res.status(200).json({
@@ -57,4 +57,5 @@ app.post('/fetch', async (req,res) => {
         res.status(500).json({ success: false, error: 'Internal Server Error', details: error.message });
     }
 });
+
 module.exports = app;
