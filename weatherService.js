@@ -18,14 +18,16 @@ const fetchWeather = async(coordinates) => {
     }
     
     const weatherJSON = {
-        location: weatherData.location.name,
-        temp_f: weatherData.current.temp_f,
-        feelslike_f: weatherData.current.feelslike_f,
-        condition: {
-            icon: weatherData.current.condition.icon,
-            text: weatherData.current.condition.text
+        Weather:{
+            location: weatherData.location.name,
+            temp_f: weatherData.current.temp_f,
+            feelslike_f: weatherData.current.feelslike_f,
+            condition: {
+                icon: weatherData.current.condition.icon,
+                text: weatherData.current.condition.text
+            },
         },
-        wind: {
+        Wind: {
             wind_mph: weatherData.current.wind_mph,
             wind_degree: weatherData.current.wind_degree
         } 

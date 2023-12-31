@@ -19,7 +19,9 @@ const fetchPurpleAir = async(sensorLocation) => {
     
     const purpleAirData = purpleAirRes.data;
     const purpleAir = {
-        pm25: purpleAirData.sensor.stats_a['pm2.5_10minute']
+        airQuality:{
+            pm25: purpleAirData.sensor.stats_a['pm2.5_10minute']
+        }
     }
 
     cache.set(cacheKey, purpleAir, process.env.CACHE_EXPIRATION);
