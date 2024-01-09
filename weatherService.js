@@ -18,19 +18,17 @@ const fetchWeather = async(coordinates) => {
     }
     
     const weatherJSON = {
-        weather: {
-            location: weatherData.location.name,
-            temp_f: weatherData.current.temp_f,
-            feelsLike_f: weatherData.current.feelslike_f,
-            condition: {
-                icon: `https:${weatherData.current.condition.icon}`,
-                text: weatherData.current.condition.text
-            },
+        location: weatherData.location.name,
+        temp_f: weatherData.current.temp_f,
+        feelsLike_f: weatherData.current.feelslike_f,
+        condition: {
+            icon: `https:${weatherData.current.condition.icon}`,
+            text: weatherData.current.condition.text
         },
         wind: {
             wind_mph: weatherData.current.wind_mph,
             windDirection_degree: weatherData.current.wind_degree
-        } 
+        }
     };
     
     cache.set(cacheKey, weatherJSON, process.env.CACHE_EXPIRATION);
