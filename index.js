@@ -42,14 +42,13 @@ app.post('/fetch', async (req,res) => {
         if (!coordinates || !aqiSensor){
             res.status(400).json({ success: false, error: 'Zip Code or AQI Sensor was not defined in the request' });
         }else{
-            const [weatherData, purpleAir] = await Promise.all([
+            const currentConditions = await Promise.all([
                 fetchWeather(coordinates),
                 fetchPurpleAir(aqiSensor)
             ]);
             res.status(200).json({
                 success: true, 
-                weatherData,
-                purpleAir
+                currentConditions
             });
         }
     } catch (error) {

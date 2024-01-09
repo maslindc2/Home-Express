@@ -18,18 +18,18 @@ const fetchWeather = async(coordinates) => {
     }
     
     const weatherJSON = {
-        Weather:{
+        weather: {
             location: weatherData.location.name,
             temp_f: weatherData.current.temp_f,
-            feelslike_f: weatherData.current.feelslike_f,
+            feelsLike_f: weatherData.current.feelslike_f,
             condition: {
-                icon: weatherData.current.condition.icon,
+                icon: `https:${weatherData.current.condition.icon}`,
                 text: weatherData.current.condition.text
             },
         },
-        Wind: {
+        wind: {
             wind_mph: weatherData.current.wind_mph,
-            wind_degree: weatherData.current.wind_degree
+            windDirection_degree: weatherData.current.wind_degree
         } 
     };
     
@@ -55,12 +55,14 @@ const fetchWeatherFromOWP = async(coordinates) =>{
     const openWeatherData = openWeatherRes.data;
     
     const weatherJSON = {
-        location: openWeatherData.name,
-        temp_f: openWeatherData.main.temp,
-        feelslike_f: openWeatherData.main.feels_like,
-        condition: {
-            icon: `openweathermap.org/img/wn/${openWeatherData.weather[0].icon}.png`,
-            text: openWeatherData.weather[0].main
+        weather: {
+            location: openWeatherData.name,
+            temp_f: openWeatherData.main.temp,
+            feelslike_f: openWeatherData.main.feels_like,
+            condition: {
+                icon: `https://openweathermap.org/img/wn/${openWeatherData.weather[0].icon}.png`,
+                text: openWeatherData.weather[0].main
+            },
         },
         wind: {
             wind_mph: openWeatherData.wind.speed,
