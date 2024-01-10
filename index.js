@@ -4,6 +4,7 @@ const { fetchWeather } = require('./weatherService');
 const rateLimiter = require('express-rate-limit');
 const express = require('express');
 const helmet = require('helmet');
+const cors = require('cors');
 
 
 require('dotenv').config();
@@ -25,6 +26,7 @@ const limiter = rateLimiter({
 app.use(limiter);
 app.use(helmet());
 app.use(express.json());
+app.use(cors());
 
 app.listen(PORT, () => {
     console.log(`Listening on Port: ${PORT}`);
