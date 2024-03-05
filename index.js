@@ -15,6 +15,9 @@ if (!process.env.WEATHER_API_KEY || !process.env.PURPLE_AIR_API_KEY || !process.
 }
 
 const app = express();
+app.set('trust proxy', 1)
+
+
 
 const PORT = process.env.PORT || 3000;
 
